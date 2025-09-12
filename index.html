@@ -1,154 +1,234 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Date Wala Paan</title>
-
-    <!-- Google Font -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap"
-      rel="stylesheet"
-    />
-
-    <!-- Tailwind CSS -->
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datewala Paan - A Royal Treat</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide-react@0.292.0/dist/lucide-react.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDF8F0; /* Creamy off-white background */
+            color: #4A2E2A; /* Dark brown text for contrast */
+        }
+        .font-serif-display {
+            font-family: 'Cormorant Garamond', serif;
+        }
+        .hero-bg {
+            background-color: #8C4D2B; /* Rich brown for hero section */
+            background-image: url('https://placehold.co/1920x1080/8C4D2B/FDF8F0?text=Datewala+Paan');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+        }
+        .btn-primary {
+            @apply bg-[#AF724D] text-white font-bold py-3 px-8 rounded-full hover:bg-[#8C4D2B] transition-all duration-300 ease-in-out transform hover:scale-105;
+        }
+        .section-title {
+            @apply font-serif-display text-4xl md:text-5xl font-bold text-[#4A2E2A] mb-4 text-center;
+        }
+        .section-subtitle {
+            @apply text-lg text-gray-600 mb-12 text-center max-w-2xl mx-auto;
+        }
+        .nav-link {
+             @apply text-white hover:text-yellow-300 transition-colors duration-300;
+        }
+        [x-cloak] { display: none !important; }
+    </style>
+</head>
+<body x-data="{ open: false }">
 
-    <!-- React, ReactDOM, Babel, Framer Motion -->
-    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
-    <script src="https://unpkg.com/framer-motion/dist/framer-motion.umd.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  </head>
-  <body class="antialiased font-[Manrope] bg-white text-gray-900">
-    <div id="root"></div>
+    <!-- Header Section -->
+    <header class="bg-black/50 fixed top-0 left-0 w-full z-50 backdrop-blur-sm">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="font-serif-display text-3xl font-bold text-white">Datewala Paan</a>
+            
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#about" class="nav-link">Our Story</a>
+                <a href="#menu" class="nav-link">Our Paan</a>
+                <a href="#gallery" class="nav-link">Gallery</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </nav>
+            
+            <!-- Mobile Menu Button -->
+            <button @click="open = !open" class="md:hidden text-white focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </button>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <div x-show="open" x-cloak @click.away="open = false" class="md:hidden bg-black/80">
+            <nav class="flex flex-col items-center space-y-4 py-4">
+                <a href="#about" @click="open = false" class="nav-link">Our Story</a>
+                <a href="#menu" @click="open = false" class="nav-link">Our Paan</a>
+                <a href="#gallery" @click="open = false" class="nav-link">Gallery</a>
+                <a href="#contact" @click="open = false" class="nav-link">Contact</a>
+            </nav>
+        </div>
+    </header>
 
-    <script type="text/babel">
-      const { useState, useMemo } = React;
-      const { motion } = FramerMotion;
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-bg min-h-screen flex items-center justify-center text-center text-white pt-20">
+            <div class="bg-black/40 p-8 md:p-12 rounded-xl">
+                <h1 class="font-serif-display text-5xl md:text-7xl lg:text-8xl font-bold mb-4">The Royal Taste of Tradition</h1>
+                <p class="text-lg md:text-xl max-w-3xl mx-auto mb-8">Experience the exquisite blend of rich, sweet dates and fresh betel leaves. A modern twist on a timeless classic.</p>
+                <a href="#menu" class="btn-primary">Explore Our Flavors</a>
+            </div>
+        </section>
 
-      const cn = (...c) => c.filter(Boolean).join(" ");
-
-      const HeroMark = () => (
-        <span className="relative inline-block">
-          <span className="relative z-10">Date Wala Paan</span>
-          <span className="absolute -inset-1 -skew-x-6 bg-gradient-to-r from-emerald-300/70 to-amber-200/60 rounded-lg"></span>
-        </span>
-      );
-
-      function Site() {
-        // Default to light mode (false)
-        const [dark, setDark] = useState(false);
-        const year = useMemo(() => new Date().getFullYear(), []);
-
-        return (
-          <div className={cn("min-h-screen antialiased font-[Manrope]", dark ? "dark bg-black text-white" : "bg-white text-gray-900")}>
-            {/* Header */}
-            <header className="sticky top-0 z-50 border-b bg-white/80 backdrop-blur">
-              <div className="mx-auto max-w-6xl px-4 py-3 flex items-center gap-3">
-                <div className="flex items-center gap-2 font-bold text-xl">🌿 <span>Date Wala Paan</span></div>
-                <nav className="ml-auto hidden md:flex items-center gap-6 text-sm">
-                  <a href="#flavors" className="hover:text-emerald-600">Flavors</a>
-                  <a href="#story" className="hover:text-emerald-600">Story</a>
-                  <a href="#pricing" className="hover:text-emerald-600">Pricing</a>
-                  <a href="#testimonials" className="hover:text-emerald-600">Testimonials</a>
-                  <a href="#contact" className="hover:text-emerald-600">Contact</a>
-                </nav>
-                <div className="ml-3 flex items-center gap-2">
-                  <button onClick={() => setDark(!dark)} className="px-2 py-1 border rounded">
-                    {dark ? "🌙" : "☀️"}
-                  </button>
-                  <button className="ml-2 hidden sm:inline-flex gap-2 bg-emerald-600 text-white px-4 py-2 rounded-lg shadow hover:bg-emerald-700">
-                    🛒 Order
-                  </button>
+        <!-- About Us Section -->
+        <section id="about" class="py-20 md:py-32">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col md:flex-row items-center gap-12">
+                    <div class="md:w-1/2">
+                        <img src="https://placehold.co/600x400/AF724D/FFFFFF?text=Our+Legacy" alt="Datewala Paan Shop" class="rounded-2xl shadow-2xl w-full h-auto object-cover">
+                    </div>
+                    <div class="md:w-1/2 text-center md:text-left">
+                        <h2 class="section-title text-center md:text-left">A Story in Every Bite</h2>
+                        <p class="text-gray-600 leading-relaxed mb-4">
+                            Born from a passion for authentic flavors and a desire for innovation, Datewala Paan began as a small dream. We wanted to create a paan that was not just a mouth freshener, but a delightful experience. By replacing traditional sweeteners with the natural, caramel-like sweetness of premium dates, we crafted a unique flavor that's both healthy and indulgent.
+                        </p>
+                        <p class="text-gray-600 leading-relaxed">
+                            Our commitment to quality means we source only the finest betel leaves, the most succulent dates, and a secret blend of aromatic spices. Each paan is handcrafted with love, ensuring a perfect balance of taste and texture every time.
+                        </p>
+                    </div>
                 </div>
-              </div>
-            </header>
+            </div>
+        </section>
 
-            {/* Hero */}
-            <section className="mx-auto max-w-6xl px-4 py-16 grid md:grid-cols-2 gap-10 items-center bg-gradient-to-br from-emerald-50 via-white to-amber-50 rounded-3xl">
-              <div>
-                <span className="bg-emerald-600 text-white text-xs px-2 py-1 rounded">100% Tobacco-Free</span>
-                <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="mt-4 text-4xl md:text-5xl font-extrabold leading-tight">
-                  Fresh. Fun. Healthy. <br />
-                  Meet <HeroMark />
-                </motion.h1>
-                <p className="mt-4 text-gray-600">A modern after-meal bite: premium dates stuffed with gulkand, saunf, cardamom, and crunchy nuts.</p>
-                <div className="mt-6 flex flex-wrap gap-3">
-                  <button className="bg-emerald-600 text-white px-4 py-2 rounded-lg shadow hover:bg-emerald-700 flex gap-2">🛒 Order a Box</button>
-                  <button className="border px-4 py-2 rounded-lg">See Ingredients</button>
+        <!-- Menu Section -->
+        <section id="menu" class="py-20 md:py-32 bg-[#fff2e0]">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title">Our Signature Creations</h2>
+                <p class="section-subtitle">Discover your new favorite paan. Handcrafted to perfection, just for you.</p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Menu Item 1 -->
+                    <div class="bg-white rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
+                        <img src="https://placehold.co/600x400/8C4D2B/FFFFFF?text=Classic+Date+Paan" alt="Classic Date Paan" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="font-serif-display text-2xl font-bold text-[#4A2E2A] mb-2">Classic Date Paan</h3>
+                            <p class="text-gray-600 mb-4">The original masterpiece. Sweet dates, gulkand, and our special spice mix.</p>
+                            <span class="font-bold text-xl text-[#AF724D]">₹50</span>
+                        </div>
+                    </div>
+                    <!-- Menu Item 2 -->
+                    <div class="bg-white rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
+                        <img src="https://placehold.co/600x400/8C4D2B/FFFFFF?text=Chocolate+Date+Paan" alt="Chocolate Date Paan" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="font-serif-display text-2xl font-bold text-[#4A2E2A] mb-2">Chocolate Date Paan</h3>
+                            <p class="text-gray-600 mb-4">A decadent fusion. Rich dark chocolate layered over our classic date filling.</p>
+                            <span class="font-bold text-xl text-[#AF724D]">₹70</span>
+                        </div>
+                    </div>
+                    <!-- Menu Item 3 -->
+                    <div class="bg-white rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
+                        <img src="https://placehold.co/600x400/8C4D2B/FFFFFF?text=Saffron+Royale+Paan" alt="Saffron Royale Paan" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="font-serif-display text-2xl font-bold text-[#4A2E2A] mb-2">Saffron Royale Paan</h3>
+                            <p class="text-gray-600 mb-4">An exotic treat. Infused with pure saffron strands and topped with silver vark.</p>
+                            <span class="font-bold text-xl text-[#AF724D]">₹90</span>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 0.7 }}>
-                <div className="aspect-[4/3] rounded-3xl bg-gradient-to-br from-emerald-100 to-amber-100 border flex items-center justify-center">
-                  <svg viewBox="0 0 200 200" className="w-2/3">
-                    <defs>
-                      <linearGradient id="g1" x1="0" x2="1">
-                        <stop offset="0%" stopColor="#065f46" />
-                        <stop offset="100%" stopColor="#10b981" />
-                      </linearGradient>
-                    </defs>
-                    <path d="M100 30 C 40 60, 40 140, 100 170 C 160 140, 160 60, 100 30 Z" fill="url(#g1)" />
-                    <ellipse cx="100" cy="100" rx="35" ry="48" fill="#8b5e34" />
-                    <circle cx="90" cy="95" r="3" fill="#111" />
-                    <circle cx="110" cy="95" r="3" fill="#111" />
-                    <path d="M90 112 Q100 120 110 112" stroke="#111" strokeWidth="3" fill="none" />
-                  </svg>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery" class="py-20 md:py-32">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title">A Feast for the Eyes</h2>
+                <p class="section-subtitle">Moments of joy and artistry, captured forever.</p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="grid gap-4">
+                        <div><img class="h-auto max-w-full rounded-lg" src="https://placehold.co/500x750/AF724D/FFFFFF?text=Paan+Art" alt=""></div>
+                        <div><img class="h-auto max-w-full rounded-lg" src="https://placehold.co/500x350/AF724D/FFFFFF?text=Fresh+Leaves" alt=""></div>
+                    </div>
+                    <div class="grid gap-4">
+                        <div><img class="h-auto max-w-full rounded-lg" src="https://placehold.co/500x350/AF724D/FFFFFF?text=Our+Shop" alt=""></div>
+                        <div><img class="h-auto max-w-full rounded-lg" src="https://placehold.co/500x750/AF724D/FFFFFF?text=Happy+Customer" alt=""></div>
+                    </div>
+                    <div class="grid gap-4">
+                        <div><img class="h-auto max-w-full rounded-lg" src="https://placehold.co/500x750/AF724D/FFFFFF?text=Ingredients" alt=""></div>
+                        <div><img class="h-auto max-w-full rounded-lg" src="https://placehold.co/500x350/AF724D/FFFFFF?text=Events" alt=""></div>
+                    </div>
+                    <div class="grid gap-4">
+                        <div><img class="h-auto max-w-full rounded-lg" src="https://placehold.co/500x350/AF724D/FFFFFF?text=Gifting" alt=""></div>
+                        <div><img class="h-auto max-w-full rounded-lg" src="https://placehold.co/500x750/AF724D/FFFFFF?text=Close-up" alt=""></div>
+                    </div>
                 </div>
-              </motion.div>
-            </section>
+            </div>
+        </section>
 
-            {/* Flavors */}
-            <section id="flavors" className="mx-auto max-w-6xl px-4 py-14">
-              <h2 className="text-2xl md:text-3xl font-bold">Pick your flavor</h2>
-              <div className="mt-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div className="p-4 border rounded-lg hover:shadow-lg">🌿 Meetha Gulkand</div>
-                <div className="p-4 border rounded-lg hover:shadow-lg">🥥 Coconut Snow</div>
-                <div className="p-4 border rounded-lg hover:shadow-lg">🍫 Choco Mint</div>
-                <div className="p-4 border rounded-lg hover:shadow-lg">🥜 Dry Fruit Crunch</div>
-              </div>
-            </section>
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="py-20 md:py-32 bg-[#fff2e0]">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title">Words from Our Patrons</h2>
+                <p class="section-subtitle">We are humbled by the love and support of our amazing customers.</p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Testimonial 1 -->
+                    <div class="bg-white p-8 rounded-2xl shadow-lg">
+                        <p class="text-gray-600 mb-4 italic">"I never knew paan could taste this good! The date filling is a game-changer. So rich and not too sweet. Absolutely perfect!"</p>
+                        <p class="font-bold text-right text-[#4A2E2A]">- Priya S.</p>
+                    </div>
+                    <!-- Testimonial 2 -->
+                    <div class="bg-white p-8 rounded-2xl shadow-lg">
+                        <p class="text-gray-600 mb-4 italic">"Datewala Paan is my go-to place after every dinner. The quality is consistently excellent, and the flavors are just out of this world."</p>
+                        <p class="font-bold text-right text-[#4A2E2A]">- Rohan M.</p>
+                    </div>
+                    <!-- Testimonial 3 -->
+                    <div class="bg-white p-8 rounded-2xl shadow-lg">
+                        <p class="text-gray-600 mb-4 italic">"I ordered their paan for a family function, and it was a massive hit! Everyone was asking where I got it from. Highly recommended."</p>
+                        <p class="font-bold text-right text-[#4A2E2A]">- Anjali K.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-            {/* Pricing */}
-            <section id="pricing" className="mx-auto max-w-6xl px-4 py-14">
-              <h2 className="text-2xl md:text-3xl font-bold">Pricing</h2>
-              <div className="mt-6 grid md:grid-cols-3 gap-4">
-                <div className="p-6 border rounded-lg">2-piece Taster • ₹39</div>
-                <div className="p-6 border rounded-lg">4-piece Box • ₹79</div>
-                <div className="p-6 border rounded-lg">8-piece Share Pack • ₹149</div>
-              </div>
-            </section>
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 md:py-32">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="section-title">Visit Us or Get in Touch</h2>
+                <p class="section-subtitle">We'd love to serve you. Find us at our store or connect with us online.</p>
+                <div class="max-w-4xl mx-auto bg-white p-8 rounded-2xl shadow-2xl">
+                    <div class="grid md:grid-cols-2 gap-8 text-left">
+                        <div>
+                            <h3 class="font-serif-display text-2xl font-bold text-[#4A2E2A] mb-4">Our Address</h3>
+                            <p class="text-gray-600">Shop No. 5, Royal Plaza,<br>Opposite City Mall, MG Road,<br>Pimpri-Chinchwad, Maharashtra - 411018</p>
+                            <div class="mt-4">
+                                <a href="https://www.google.com/maps" target="_blank" class="text-[#AF724D] hover:underline">Get Directions</a>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="font-serif-display text-2xl font-bold text-[#4A2E2A] mb-4">Contact Details</h3>
+                            <p class="text-gray-600 mb-2"><strong>Phone:</strong> +91 98765 43210</p>
+                            <p class="text-gray-600"><strong>Email:</strong> contact@datewalapaan.com</p>
+                            <div class="flex space-x-4 mt-4">
+                                <a href="#" class="text-[#AF724D] hover:text-[#4A2E2A]"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+                                <a href="#" class="text-[#AF724D] hover:text-[#4A2E2A]"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg></a>
+                                <a href="#" class="text-[#AF724D] hover:text-[#4A2E2A]"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 1.4 2.8 3.2 3 5.2-1.4 1.2-3.2 2-5.2 2.4-1.2 3.2-3 5.4-5.4 6.8-2 1-4.2 1.2-6.4 1-2.2-.2-4.2-1-6-2.2-.2-1.2-.4-2.4-.4-3.6 0-3.6 2.2-6.6 5.4-8 1.4-2.8 3.2-5 5.2-6.4 2.2-1.4 4.6-2 7-2z"></path><path d="M12 12c-2 0-3.2 1.2-4.2 2.4-1.2 1.4-2 3.2-2 5.2"></path><path d="m14 6-2 2-2-2"></path></svg></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
-            {/* Testimonials */}
-            <section id="testimonials" className="mx-auto max-w-6xl px-4 py-14 grid md:grid-cols-3 gap-4">
-              <div className="p-4 border rounded-lg">“Perfect after-meal bite.” – Aarav</div>
-              <div className="p-4 border rounded-lg">“Dry Fruit Crunch + Coffee = ❤️” – Mira</div>
-              <div className="p-4 border rounded-lg">“Hygienic and quick.” – Prof. Nair</div>
-            </section>
+    <!-- Footer -->
+    <footer class="bg-[#4A2E2A] text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 Datewala Paan. All Rights Reserved.</p>
+            <p class="text-sm text-gray-400 mt-2">Crafted with ❤️ in Pimpri-Chinchwad</p>
+        </div>
+    </footer>
 
-            {/* Contact */}
-            <section id="contact" className="mx-auto max-w-6xl px-4 py-14">
-              <h3 className="text-2xl font-bold">Contact</h3>
-              <p className="mt-2 text-gray-600">Bulk enquiries, campus tie-ups, or feedback—drop a line.</p>
-              <ul className="mt-4 space-y-2 text-sm">
-                <li>📞 +91-90000-00000</li>
-                <li>✉️ hello@datewalapaan.in</li>
-                <li>📍 Hinjewadi • Pune</li>
-              </ul>
-            </section>
-
-            {/* Footer */}
-            <footer className="border-t mt-20">
-              <div className="mx-auto max-w-6xl px-4 py-10 text-sm flex flex-col md:flex-row items-center gap-3 md:gap-6">
-                <div className="flex items-center gap-2">🌿 Date Wala Paan</div>
-                <div className="md:ml-auto">© {year} Date Wala Paan. All rights reserved.</div>
-              </div>
-            </footer>
-          </div>
-        );
-      }
-
-      ReactDOM.createRoot(document.getElementById("root")).render(<Site />);
-    </script>
-  </body>
+    <!-- AlpineJS for mobile menu -->
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+</body>
 </html>
