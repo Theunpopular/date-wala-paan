@@ -1,0 +1,240 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Datewala Paan - Premium handcrafted paan shop in Pune, offering fresh betel leaf preparations with dates, rose, chocolate, and fruit flavors.">
+    <meta name="keywords" content="paan shop Mumbai, Datewala Paan, handcrafted paan, betel leaf, Pune paan shop, premium paan">
+    <meta name="author" content="Datewala Paan">
+    <title>Datewala Paan - Premium Handcrafted Paan in Pune</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Noto+Serif+Devanagari:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        h1, h2, h3 { font-family: 'Noto Serif Devanagari', serif; }
+        .masonry { column-count: 2; column-gap: 1rem; }
+        .masonry img { break-inside: avoid; margin-bottom: 1rem; width: 100%; }
+        @media (min-width: 768px) { .masonry { column-count: 3; } }
+        .carousel { overflow: hidden; position: relative; }
+        .carousel-inner { display: flex; transition: transform 0.5s ease; }
+        .carousel-item { min-width: 100%; }
+    </style>
+</head>
+<body class="bg-amber-50 text-gray-800">
+    <!-- Header -->
+    <header class="fixed top-0 w-full bg-red-800 text-white z-10 shadow-md">
+        <nav class="container mx-auto flex items-center justify-between p-4">
+            <div class="flex items-center">
+                <img src="https://via.placeholder.com/40?text=Leaf" alt="Datewala Paan Logo" class="w-10 h-10 mr-2">
+                <span class="text-2xl font-bold">Datewala Paan</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="#home" class="hover:text-amber-300">Home</a>
+                <a href="#about" class="hover:text-amber-300">About Us</a>
+                <a href="#menu" class="hover:text-amber-300">Menu</a>
+                <a href="#gallery" class="hover:text-amber-300">Gallery</a>
+                <a href="#contact" class="hover:text-amber-300">Contact</a>
+            </div>
+            <a href="#menu" class="bg-amber-500 text-white px-4 py-2 rounded hover:bg-amber-600">Order Now</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-20 bg-cover bg-center h-screen" style="background-image: url('https://via.placeholder.com/1920x1080?text=Paan+Banner');">
+        <div class="container mx-auto text-center text-white h-full flex flex-col justify-center bg-black bg-opacity-50">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4">Indulge in the Sweet Symphony of Datewala Paan</h1>
+            <p class="text-xl mb-6">Fresh, Handcrafted Paans Delivered to Your Doorstep</p>
+            <div class="max-w-md mx-auto">
+                <input type="text" placeholder="Name" class="w-full p-2 mb-2 rounded">
+                <input type="tel" placeholder="Phone" class="w-full p-2 mb-2 rounded">
+                <button class="bg-amber-500 text-white px-4 py-2 rounded w-full hover:bg-amber-600">Reserve Now</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="py-16 container mx-auto">
+        <div class="flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-6 md:mb-0">
+                <img src="https://via.placeholder.com/600x400?text=Founder" alt="Founder" class="rounded-lg shadow-lg w-full">
+            </div>
+            <div class="md:w-1/2 md:pl-8">
+                <h2 class="text-3xl font-bold text-red-800 mb-4">About Datewala Paan</h2>
+                <p class="text-lg">Founded in 2010 in the bustling streets of Pune, Datewala Paan blends age-old recipes with premium dates for an unforgettable experience. Our paans are 100% natural, no preservatives, and crafted with love.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="py-16 bg-green-100">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center text-red-800 mb-8">Our Paan Varieties</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-4 rounded-lg shadow-lg">
+                    <img src="https://via.placeholder.com/300x200?text=Classic+Paan" alt="Classic Sweet Paan" class="w-full rounded">
+                    <h3 class="text-xl font-bold mt-2">Classic Sweet Paan</h3>
+                    <p class="text-sm">Betel leaf, gulkand, betel nut, lime paste. ₹50</p>
+                    <p class="text-xs text-gray-600">Allergens: Nuts</p>
+                    <button class="bg-amber-500 text-white px-4 py-2 mt-2 rounded w-full hover:bg-amber-600" onclick="addToCart('Classic Sweet Paan', 50)">Add to Cart</button>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-lg">
+                    <img src="https://via.placeholder.com/300x200?text=Date+Paan" alt="Date Elixir Paan" class="w-full rounded">
+                    <h3 class="text-xl font-bold mt-2">Date Elixir Paan</h3>
+                    <p class="text-sm">Betel leaf, dates, saffron, cardamom. ₹80</p>
+                    <p class="text-xs text-gray-600">Allergens: None</p>
+                    <button class="bg-amber-500 text-white px-4 py-2 mt-2 rounded w-full hover:bg-amber-600" onclick="addToCart('Date Elixir Paan', 80)">Add to Cart</button>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-lg">
+                    <img src="https://via.placeholder.com/300x200?text=Chocolate+Paan" alt="Chocolate Dream Paan" class="w-full rounded">
+                    <h3 class="text-xl font-bold mt-2">Chocolate Dream Paan</h3>
+                    <p class="text-sm">Betel leaf, chocolate, coconut, rose. ₹100</p>
+                    <p class="text-xs text-gray-600">Allergens: Dairy</p>
+                    <button class="bg-amber-500 text-white px-4 py-2 mt-2 rounded w-full hover:bg-amber-600" onclick="addToCart('Chocolate Dream Paan', 100)">Add to Cart</button>
+                </div>
+                <!-- Add more items as needed -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-16 container mx-auto">
+        <h2 class="text-3xl font-bold text-center text-red-800 mb-8">Gallery</h2>
+        <div class="masonry">
+            <img src="https://via.placeholder.com/300x200?text=Paan+Making" alt="Paan Making">
+            <img src="https://via.placeholder.com/300x300?text=Customer" alt="Customer">
+            <img src="https://via.placeholder.com/300x400?text=Catering" alt="Catering">
+            <img src="https://via.placeholder.com/300x250?text=Shop" alt="Shop">
+            <img src="https://via.placeholder.com/300x350?text=Paan+Prep" alt="Paan Prep">
+            <img src="https://via.placeholder.com/300x200?text=Event" alt="Event">
+            <img src="https://via.placeholder.com/300x300?text=Customer+2" alt="Customer 2">
+            <img src="https://via.placeholder.com/300x400?text=Catering+2" alt="Catering 2">
+            <img src="https://via.placeholder.com/300x250?text=Shop+2" alt="Shop 2">
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-16 bg-green-100">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center text-red-800 mb-8">What Our Customers Say</h2>
+            <div class="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item text-center">
+                        <p class="text-lg italic">"The best paan I've ever tasted! – Priya S."</p>
+                    </div>
+                    <div class="carousel-item text-center">
+                        <p class="text-lg italic">"Date Elixir Paan is a game-changer! – Rohan K."</p>
+                    </div>
+                    <div class="carousel-item text-center">
+                        <p class="text-lg italic">"Perfect for events, everyone loved it! – Anjali M."</p>
+                    </div>
+                    <div class="carousel-item text-center">
+                        <p class="text-lg italic">"Fresh and flavorful every time! – Vikram P."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 container mx-auto">
+        <h2 class="text-3xl font-bold text-center text-red-800 mb-8">Contact Us</h2>
+        <div class="flex flex-col md:flex-row">
+            <div class="md:w-1/2 mb-6 md:mb-0">
+                <form class="max-w-md mx-auto">
+                    <input type="text" placeholder="Name" class="w-full p-2 mb-2 rounded">
+                    <input type="email" placeholder="Email" class="w-full p-2 mb-2 rounded">
+                    <input type="tel" placeholder="Phone" class="w-full p-2 mb-2 rounded">
+                    <textarea placeholder="Message" class="w-full p-2 mb-2 rounded h-32"></textarea>
+                    <button class="bg-amber-500 text-white px-4 py-2 rounded w-full hover:bg-amber-600">Send Message</button>
+                </form>
+            </div>
+            <div class="md:w-1/2 md:pl-8">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3783.111803797293!2d73.85574371489747!3d18.52043028741115!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c079b51b2e7f%3A0x8f2e3d4e4b1b7f0a!2sPune%2C%20Maharashtra%2C%20India!5e0!3m2!1sen!2sin!4v1634567891234!5m2!1sen!2sin" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                <p class="mt-4">Mon-Sun: 5 PM - 11 PM</p>
+                <div class="flex space-x-4 mt-4">
+                    <a href="https://instagram.com" target="_blank"><img src="https://via.placeholder.com/30?text=IG" alt="Instagram" class="w-8 h-8"></a>
+                    <a href="https://facebook.com" target="_blank"><img src="https://via.placeholder.com/30?text=FB" alt="Facebook" class="w-8 h-8"></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-red-800 text-white py-8">
+        <div class="container mx-auto text-center">
+            <div class="mb-4">
+                <input type="email" placeholder="Subscribe to our newsletter" class="p-2 rounded-l w-64">
+                <button class="bg-amber-500 text-white px-4 py-2 rounded-r hover:bg-amber-600">Subscribe</button>
+            </div>
+            <div class="flex justify-center space-x-6 mb-4">
+                <a href="#home" class="hover:text-amber-300">Home</a>
+                <a href="#about" class="hover:text-amber-300">About</a>
+                <a href="#menu" class="hover:text-amber-300">Menu</a>
+                <a href="#gallery" class="hover:text-amber-300">Gallery</a>
+                <a href="#contact" class="hover:text-amber-300">Contact</a>
+            </div>
+            <p>&copy; 2025 Datewala Paan. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Stripe Integration
+        const stripe = Stripe('pk_test_your_publishable_key');
+        let cart = [];
+
+        function addToCart(item, price) {
+            cart.push({ item, price });
+            alert(`${item} added to cart! Total: ₹${cart.reduce((sum, i) => sum + i.price, 0)}`);
+        }
+
+        // Carousel Logic
+        const carouselInner = document.querySelector('.carousel-inner');
+        let currentIndex = 0;
+        const items = document.querySelectorAll('.carousel-item');
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % items.length;
+            carouselInner.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }, 3000);
+    </script>
+</body>
+</html>
