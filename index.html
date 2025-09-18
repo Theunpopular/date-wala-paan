@@ -24,22 +24,20 @@
       --glass: rgba(255,255,255,0.6);
     }
     *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:'Montserrat',system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial;color:#2b5813;background:linear-gradient(180deg,var(--green-50),#ffffff);}
+    html,body{height:100%;margin:0;font-family:'Montserrat',system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial;color:#064e3b;background:linear-gradient(180deg,var(--green-50),#ffffff);}
     a{color:inherit;text-decoration:none}
     header{background:linear-gradient(90deg, rgba(255,255,255,0.85), rgba(255,255,255,0.6));backdrop-filter: blur(6px);position:sticky;top:0;z-index:60;box-shadow:0 6px 18px rgba(4,120,87,0.06)}
     .container{max-width:var(--max-width);margin:0 auto;padding:24px}
     .nav{display:flex;align-items:center;justify-content:space-between;gap:12px}
     .brand{display:flex;align-items:center;gap:12px}
-    .logo img {
-  display:block;
-}
-
+    .logo{width:52px;height:52px;border-radius:12px;background:linear-gradient(135deg,var(--green-600),var(--green-700));display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:20px;box-shadow:0 6px 18px rgba(5,150,105,0.18)}
+    nav ul{display:flex;gap:18px;align-items:center;margin:0;padding:0;list-style:none}
     .btn{background:var(--accent);color:white;padding:10px 14px;border-radius:10px;font-weight:600;display:inline-block}
 
     /* Hero */
     .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;padding:40px 0}
     .hero-card{background:rgba(255,255,255,0.9);border-radius:18px;padding:28px;box-shadow:0 18px 40px rgba(6,95,70,0.06)}
-    h1{margin:0 0 10px;font-size:34px;color:#2b5813}
+    h1{margin:0 0 10px;font-size:34px;color:#064e3b}
     p.lead{margin:0 0 18px;color:#065f46;opacity:0.95}
     .features{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}
     .chip{background:var(--green-50);border:1px solid rgba(5,150,105,0.06);padding:8px 12px;border-radius:999px;font-weight:600}
@@ -60,7 +58,7 @@
     form input, form textarea{width:100%;padding:12px;border-radius:10px;border:1px solid #d1fae5;margin-bottom:12px}
     form button{background:var(--green-700);color:white;padding:12px 16px;border-radius:10px;border:0;font-weight:700}
 
-    footer{padding:24px 0;text-align:center;color:#2b5813;opacity:0.9}
+    footer{padding:24px 0;text-align:center;color:#064e3b;opacity:0.9}
 
     /* Responsive */
     @media (max-width:920px){.hero,.two-col{grid-template-columns:1fr} .grid{grid-template-columns:repeat(2,1fr)} .hero p.lead{font-size:15px}}
@@ -73,7 +71,7 @@
       <div class="brand">
         <div class="logo">D</div>
         <div>
-          <div style="font-weight:700;color:#2b5813">Datewala Paan</div>
+          <div style="font-weight:700;color:#064e3b">Datewala Paan</div>
           <div style="font-size:12px;color:#065f46;opacity:0.9">Authentic Khajoor Paan • Made with love</div>
         </div>
       </div>
@@ -107,7 +105,7 @@
 
       <aside>
         <div class="product">
-          <img src="images/2025-09-18.png?auto=format&fit=crop&w=1200&q=80" alt="Khajoor Paan">
+          <img src="https://images.unsplash.com/photo-1604908176385-3e09b1eb5b7f?auto=format&fit=crop&w=1200&q=80" alt="Khajoor Paan">
           <div class="product-body">
             <div style="display:flex;justify-content:space-between;align-items:center">
               <div style="font-weight:700">Classic Khajoor Paan</div>
@@ -120,7 +118,7 @@
     </section>
 
     <section id="products">
-      <h2 style="color:#2b5813">Our Products</h2>
+      <h2 style="color:#064e3b">Our Products</h2>
       <p style="color:#065f46">Choose from curated variants — Classic, Premium Nuts, and Sugar-Free.</p>
       <div class="grid" style="margin-top:16px">
         <div class="card">
@@ -144,10 +142,10 @@
     <section id="about">
       <div class="two-col">
         <div>
-          <h2 style="color:#2b5813">About Datewala Paan</h2>
+          <h2 style="color:#064e3b">About Datewala Paan</h2>
           <p style="color:#065f46">Started with a love for traditional paan and a passion for wholesome ingredients, Datewala Paan is dedicated to bringing you the finest Khajoor Paan — made in small batches, with care. We source premium dates and natural fillers, prioritizing flavour and quality.</p>
 
-          <h3 style="margin-top:18px;color:#2b5813">Why Choose Us</h3>
+          <h3 style="margin-top:18px;color:#064e3b">Why Choose Us</h3>
           <ul style="color:#065f46">
             <li>Locally-sourced premium dates</li>
             <li>No preservatives or artificial additives</li>
@@ -167,7 +165,7 @@
     </section>
 
     <section id="gallery">
-      <h2 style="color:#2b5813">Gallery</h2>
+      <h2 style="color:#064e3b">Gallery</h2>
       <div class="grid" style="margin-top:12px">
         <div class="card"><img src="https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?auto=format&fit=crop&w=800&q=60" style="width:100%;height:160px;object-fit:cover;border-radius:8px"></div>
         <div class="card"><img src="https://images.unsplash.com/photo-1606813902897-7b5b2f1d1a6b?auto=format&fit=crop&w=800&q=60" style="width:100%;height:160px;object-fit:cover;border-radius:8px"></div>
@@ -176,7 +174,7 @@
     </section>
 
     <section id="contact">
-      <h2 style="color:#2b5813">Contact & Orders</h2>
+      <h2 style="color:#064e3b">Contact & Orders</h2>
       <div class="two-col" style="margin-top:12px">
         <div>
           <form action="mailto:orders@datewalapaan.com" method="post" enctype="text/plain">
@@ -190,7 +188,7 @@
 
         <aside>
           <div class="card" style="padding:18px;text-align:left">
-            <h3 style="margin-top:0;color:#2b5813">Visit Us</h3>
+            <h3 style="margin-top:0;color:#064e3b">Visit Us</h3>
             <div style="font-weight:700">Datewala Paan, Market Street</div>
             <div style="margin-top:6px;color:#065f46;opacity:0.9">Open: Mon - Sat • 10:00 AM - 8:00 PM</div>
             <div style="margin-top:12px">
