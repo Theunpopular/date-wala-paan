@@ -49,8 +49,12 @@
     .price{font-size:20px;font-weight:700;color:var(--accent)}
 
     /* Gallery */
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-    .card{background:white;border-radius:12px;padding:12px;text-align:center}
+    .responsive-img {
+  max-width: 100%;   /* scale down if container is smaller */
+  height: auto;      /* keep aspect ratio */
+  display: block;    /* remove inline gaps */
+  margin: 0 auto;    /* center it */
+}
 
     /* About & Contact */
     section{padding:36px 0}
